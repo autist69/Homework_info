@@ -3,39 +3,25 @@ import pandas as pd
 
 iris_data = pd.read_csv("iris_data.csv")
 
-types = list(iris_data["Species"])
-length = list(iris_data["PetalLengthCm"])
+sl = list(iris_data["SepalLengthCm"])
+sw = list(iris_data["SepalWidthCm"])
+pl = list(iris_data["PetalLengthCm"])
+pw = list(iris_data["PetalWidthCm"])
 
-counter = len(types)
+fig = plt.figure(figsize = (16, 10))
 
-flow_number = {}
-for name in types:
-    if name not in flow_number:
-        flow_number[name] = 1
-    else:
-        flow_number[name] += 1
+ax1 = fig.add_subplot(321)
+ax2 = fig.add_subplot(322)
+ax3 = fig.add_subplot(323)
+ax4 = fig.add_subplot(324)
+ax5 = fig.add_subplot(325)
+ax6 = fig.add_subplot(326)
 
-sizes = [1.2, 1.5]
-petal_len = [0] * 3
-for numb in length:
-    if numb <= sizes[0]:
-        petal_len[0] += 1
-    elif sizes[0] < numb <= sizes[1]:
-        petal_len[1] += 1
-    else:
-        petal_len[2] += 1
-
-fig = plt.figure(figsize = (12, 6))
-
-ax1 = fig.add_subplot(121)
-ax2 = fig.add_subplot(122)
-
-ax1.pie(flow_number.values(), labels=flow_number.keys())
-ax2.pie(petal_len, labels=["<= 1.2", "1.2 < and <= 1.5", "> 1.5"])
-
-ax1.set_title("Types of irises, %")
-ax2.set_title("Syzes fo petals, %")
-
-fig.suptitle("Flowers' statistic", fontsize=16)
+ax1.scatter(sl, sw, "b^")
+ax2.scatter(sl, pl, "b^")
+ax3.scatter(sl, pw, "b^")
+ax4.scatter(sw, pl, "b^")
+ax5.scatter(sw, pw, "b^")
+ax6.scatter(pl, pw, "b^")
 
 plt.show()
